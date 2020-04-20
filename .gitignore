@@ -13,6 +13,9 @@
 
 # misc
 .DS_Store
+.env
+process.env.REACT_APP_MEME_IMGFLIP_USERNAME
+process.env.REACT_APP_MEME_IMGFLIP_PASSWORD
 .env.local
 .env.development.local
 .env.test.local

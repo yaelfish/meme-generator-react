@@ -1,0 +1,7 @@
+a {
+    color: $light-grey;
+    &.router-link-active {
+        color: $clr3;
+    }
+}
+
