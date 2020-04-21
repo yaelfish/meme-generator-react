@@ -1,6 +1,10 @@
 section.meme-container {
     padding: 40px 25px;
     height: 90vh;
+
+    @include for-normal-layout {
+        flex-direction: column;
+    }
 }
 
 .meme-pic-edited {

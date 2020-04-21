@@ -1,23 +1,27 @@
 import React, { useEffect, useState } from 'react';
 
-function ColorPicker({ changeColor, colorType }) {
+function ColorPicker({ changeColor, colorType, toggleVisibility }) {
 
-    const [color, setColor] = useState("#FFFFFF");
+    const [color, setColor] = useState();
+    
     useEffect(() => {
         changeColor(color, colorType);
-    }, [color, colorType])
+    }, [color, colorType, changeColor])
 
     const onColorSelection = (e) => {
         let changedColor = e.target.value;
         setColor(changedColor);
+        changeColor(changedColor, colorType);
     }
+
+    
 
     return (
         <div className="color-picker">
-            {/* <span 
-                className="btn btn-sm btn-secondary"
-                onClick={changeColor}
-            >X</span> */}
+            <button 
+                className="btn btn-sm btn-secondary close-color-picker"
+                onClick={toggleVisibility}
+            >X</button>
             <input type="checkbox" id="chk-ham-menu" className="ham-check" onChange={(e)=>setColor(e.target.value)} />
             <div className="ham-menu flex column">
                 <div className="flex">
@@ -30,14 +34,14 @@ function ColorPicker({ changeColor, colorType }) {
                     <label htmlFor="alizarin" className="color-picker alizarin" data-color="e74c3c" onClick={onColorSelection}></label>
                     <label htmlFor="sun" className="color-picker sun" data-color="#f1c40f" onClick={onColorSelection}></label>
                     <label htmlFor="black" className="color-picker black" data-color="#000000" onClick={onColorSelection}></label>
-                    <label htmlFor="white" className="color-picker white" data-color="#FFFFFF" onClick={onColorSelection}></label>
+                    <label htmlFor="white" className="color-picker white" data-color="#ffffff" onClick={onColorSelection}></label>
                 </div>
                 <div className="flex">
-                    <input type="text" name="color-chooser" id="" value="#FFFFFF" placeholder="#FFFFFF" onChange={onColorSelection} />
+                    <input type="text" name="color-chooser" id="" value="#ffffff" placeholder="#ffffff" onChange={onColorSelection} />
                 </div>
             </div>
             <input type="radio" name="color-chooser" id="black" value="#000000" onChange={onColorSelection} />
-            <input type="radio" name="color-chooser" id="white" value="#FFFFFF" onChange={onColorSelection} />
+            <input type="radio" name="color-chooser" id="white" value="#ffffff" onChange={onColorSelection} />
             <input type="radio" name="color-chooser" id="amethyst" value="#9b59b6" onChange={onColorSelection} />
             <input type="radio" name="color-chooser" id="peter" value="#3498db" onChange={onColorSelection} />
             <input type="radio" name="color-chooser" id="emarald" value="#2ecc71" onChange={onColorSelection} />

@@ -8,14 +8,13 @@
     align-items: center;
     flex-flow: column;
     justify-content: center;
-    // margin-top: 16px;
 
     .text1,
     .text2 {
         position: absolute;
         margin: 0;
         width: 100%;
-        font-family: Impact, "Comic Sans MS", "Arial Narrow Bold", Arial, Helvetica, Times, sans-serif;
+        // font-family: Impact, "Comic Sans MS", "Arial Narrow Bold", Arial, Helvetica, Times, sans-serif;
         font-size: 48px;
         text-align: center;
         text-transform: uppercase;
@@ -39,13 +38,13 @@
         // text-shadow: 0px 0px 4px white;
     }
     img.canvas-img {
-        // width: 100%;
-        // object-fit: contain;
-        // max-height: 60vh;
-
         max-width: 520px;
         height: auto;
         max-height: 500px;
         object-fit: contain;
+
+        @include for-normal-layout {
+            max-width: 300px;
+        }
     }
 }

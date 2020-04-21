@@ -12,7 +12,7 @@ export default function MemeDetails({ memes }) {
     const history = useHistory();
     const [currMeme, setCurrMeme] = useState({});
     const [texts, setTexts] = useState({});
-    const [font, setFont] = useState('impact');
+    const [font, setFont] = useState();
     const [newMemeUrl, setnewMemeUrl] = useState('');
     const [isEditMode, toggleEditMode] = useToggle(true);
 
@@ -31,14 +31,19 @@ export default function MemeDetails({ memes }) {
         history.push(`/meme/${id}/edit`);
     }
 
-    function handleFormData(memeUrl) {
+    async function handleFormData(generatedMemeData) {
+        console.log(generatedMemeData);
+        
+        let newMemeUrl = await memeService.postMeme(generatedMemeData);
         toggleEditMode(false);
         setCurrMeme(currMeme);
-        setnewMemeUrl(memeUrl);
+        setnewMemeUrl(newMemeUrl);
         history.push(`/meme/${id}`);
     }
 
     function updateTexts(texts) {
+        console.log(texts);
+        console.log(texts.font);
         setTexts(texts);
         setFont(texts.font);
     }

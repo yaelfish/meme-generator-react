@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import memeService from '../../services/memeService'
 import useInput from '../../hooks/useInput';
 import useToggle from '../../hooks/useToggle';
@@ -9,32 +9,34 @@ function MemeForm({ handleFormData, updateTexts, currMeme }) {
 
     const [text1, bindText1, resetText1] = useInput("");
     const [text2, bindText2, resetText2] = useInput("");
-    const [font, bindFont, resetFont] = useInput("impact");
-    const [isColor1, toggleisColor1] = useToggle(false);
-    const [isColor2, toggleisColor2] = useToggle(false);
-    const [isStroke1, toggleisStroke1] = useToggle(false);
-    const [isStroke2, toggleisStroke2] = useToggle(false);
-    const [color1, setColor1] = useState("#FFFFFF");
-    const [color2, setColor2] = useState("#FFFFFF");
+    const [font, bindFont, resetFont] = useInput('impact');
+    const [isVisible, toggleIsVisible] = useToggle(false);
+    const [color1, setColor1] = useState("#ffffff");
+    const [color2, setColor2] = useState("#ffffff");
     const [stroke1, setStroke1] = useState("#000000");
     const [stroke2, setStroke2] = useState("#000000");
+    const [type, setType] = useState();
 
-    const submitHandler = async (e) => {
+    useEffect(() => {
+        updateTexts({ text1, color1, stroke1, text2, color2, stroke2, font });
+    }, [text1, color1, stroke1, text2, color2, stroke2, font])
+
+    const submitHandler = (e) => {
         e.preventDefault();
-        const memeUrl = await memeService.postMeme({ text1, color1, stroke1, text2, color2, stroke2, font, currMeme });
+        const memeData = { text1, color1, stroke1, text2, color2, stroke2, font, currMeme };
         resetText1();
         resetText2();
         resetFont();
-        handleFormData(memeUrl);
+        console.log(memeData);
+        handleFormData(memeData);
     }
 
-    useEffect(() => {
-        updateTexts({ text1, color1, stroke1, text2, color2, stroke2, font  });
-        console.log(font);
-        
-    }, [text1, color1, stroke1, text2, color2, stroke2, font])
+    const toggleVisibility = () => {
+        toggleIsVisible(!isVisible);
+    }
 
-    function changeColor(color, colorType) {
+    const changeColor = useCallback((color, colorType) => {
+
         switch (colorType) {
             case 'color1':
                 setColor1(color);
@@ -42,18 +44,22 @@ function MemeForm({ handleFormData, updateTexts, currMeme }) {
             case 'color2':
                 setColor2(color);
                 break;
-               
             case 'stroke1':
                 setStroke1(color);
                 break;
-
             case 'stroke2':
                 setStroke2(color);
                 break;
-
             default:
                 break;
         }
+    }, []);
+
+    const toggleColorPicker = (e) => {
+        e.preventDefault();
+        let type = e.currentTarget.attributes['input-data'].value;
+        setType(type)
+        toggleVisibility();
     }
 
     return (
@@ -61,10 +67,10 @@ function MemeForm({ handleFormData, updateTexts, currMeme }) {
             <form className="flex column justify-center">
                 <div className="form-group">
                     <label htmlFor="inputFont">Choose Font</label>
-                    <select 
-                        id="inputFont" 
-                        name="font" 
-                        className="form-control" 
+                    <select
+                        id="inputFont"
+                        name="font"
+                        className="form-control"
                         {...bindFont}
                     >
                         <option style={{ fontFamily: "Impact" }} value="impact" defaultValue>Impact</option>
@@ -75,7 +81,7 @@ function MemeForm({ handleFormData, updateTexts, currMeme }) {
                     </select>
                 </div>
 
-                <div className="form-group">
+                <div className="form-group flex">
                     <input
                         className="form-control"
                         type="text"
@@ -83,42 +89,53 @@ function MemeForm({ handleFormData, updateTexts, currMeme }) {
                         {...bindText1}
                         required
                         placeholder="Top Text" />
-                    <button onClick={(e) => {
-                        e.preventDefault();
-                        toggleisColor1(!isColor1)
-                    }}>pick font color
+                    <button
+                        onClick={toggleColorPicker}
+                        style={{ backgroundColor: "transparent" }}
+                        input-data="color1"
+                        title="font color"
+                    >
+                        <div style={{ backgroundColor: color1, width: "15px", height: "15px" }}></div>
                     </button>
-                    <button onClick={(e) => {
-                        e.preventDefault();
-                        toggleisStroke1(!isStroke1)
-                    }}>pick stroke color
+                    <button
+                        onClick={toggleColorPicker}
+                        style={{ backgroundColor: "transparent" }}
+                        input-data="stroke1"
+                        title="stroke color"
+                    >
+                        <div style={{ backgroundColor: stroke1, width: "15px", height: "15px" }}></div>
                     </button>
-                    {isColor1 && <ColorPicker changeColor={changeColor} colorType='color1' />}
-                    {isStroke1 && <ColorPicker changeColor={changeColor} colorType='stroke1' />}
                 </div>
-
-                <div className="form-group">
+                <div className="form-group flex">
                     <input
                         className="form-control"
                         type="text"
                         name="text2"
                         {...bindText2}
                         placeholder="Bottom Text" />
-                    <button onClick={(e) => {
-                        e.preventDefault();
-                        toggleisColor2(!isColor2)
-                    }}>pick font color
+                    <button
+                        onClick={toggleColorPicker}
+                        style={{ backgroundColor: "transparent" }}
+                        input-data="color2"
+                        title="font color"
+                    >
+                        <div style={{ backgroundColor: color1, width: "15px", height: "15px" }}></div>
                     </button>
-                    <button onClick={(e) => {
-                        e.preventDefault();
-                        toggleisStroke2(!isStroke2)
-                    }}>pick stroke color
+                    <button
+                        onClick={toggleColorPicker}
+                        style={{ backgroundColor: "transparent" }}
+                        input-data="stroke2"
+                        title="stroke color"
+                    >
+                        <div style={{ backgroundColor: stroke1, width: "15px", height: "15px" }}></div>
                     </button>
-                    {isColor2 && <ColorPicker changeColor={changeColor} colorType='color2' />}
-                    {isStroke2 && <ColorPicker changeColor={changeColor} colorType='stroke2' />}
                 </div>
-
-
+                {isVisible && <ColorPicker
+                                changeColor={changeColor}
+                                colorType={type}
+                                toggleVisibility={toggleVisibility}
+                                // toggleColorPicker={toggleColorPicker} 
+                            />}
                 <button type="submit" className="btn btn-primary" onClick={submitHandler}>Generate Meme</button>
             </form>
         </div>
