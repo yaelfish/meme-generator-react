@@ -119,7 +119,7 @@ function MemeForm({ handleFormData, updateTexts, currMeme }) {
                         input-data="color2"
                         title="font color"
                     >
-                        <div style={{ backgroundColor: color1, width: "15px", height: "15px" }}></div>
+                        <div style={{ backgroundColor: color2, width: "15px", height: "15px" }}></div>
                     </button>
                     <button
                         onClick={toggleColorPicker}
@@ -127,14 +127,13 @@ function MemeForm({ handleFormData, updateTexts, currMeme }) {
                         input-data="stroke2"
                         title="stroke color"
                     >
-                        <div style={{ backgroundColor: stroke1, width: "15px", height: "15px" }}></div>
+                        <div style={{ backgroundColor: stroke2, width: "15px", height: "15px" }}></div>
                     </button>
                 </div>
                 {isVisible && <ColorPicker
                                 changeColor={changeColor}
                                 colorType={type}
                                 toggleVisibility={toggleVisibility}
-                                // toggleColorPicker={toggleColorPicker} 
                             />}
                 <button type="submit" className="btn btn-primary" onClick={submitHandler}>Generate Meme</button>
             </form>

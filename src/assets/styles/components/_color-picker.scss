@@ -33,18 +33,14 @@ input[type="url"] {
 }
 
 .close-color-picker {
-    position: absolute;
     top: -164px;
-    /* left: 791px; */
+    left: 791px;
+    position: relative;
     left: 95px;
     border-radius: 2px;
     box-shadow: 0px 0px 4px 0px lightgrey;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    padding: 0px;
-    justify-content: center;
     z-index: 9;
+    line-height: normal;
 }
 
 #container::after {

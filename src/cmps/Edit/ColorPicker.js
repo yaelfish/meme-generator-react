@@ -14,15 +14,18 @@ function ColorPicker({ changeColor, colorType, toggleVisibility }) {
         changeColor(changedColor, colorType);
     }
 
-    
-
     return (
         <div className="color-picker">
             <button 
                 className="btn btn-sm btn-secondary close-color-picker"
                 onClick={toggleVisibility}
             >X</button>
-            <input type="checkbox" id="chk-ham-menu" className="ham-check" onChange={(e)=>setColor(e.target.value)} />
+            <input 
+                type="checkbox" 
+                id="chk-ham-menu" 
+                className="ham-check" 
+                onChange={(e)=>setColor(e.target.value)} 
+            />
             <div className="ham-menu flex column">
                 <div className="flex">
                     <label htmlFor="amethyst" className="color-picker amethyst" data-color="#9b59b6" onClick={onColorSelection}></label>
