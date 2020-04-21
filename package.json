@@ -1,5 +1,5 @@
 {
-  "homepage": "http://yaelfish.github.io/meme-generator-react",
+  "homepage": "https://yaelfish.github.io/meme-generator-react",
   "name": "meme-gen-react",
   "version": "0.1.0",
   "private": true,
@@ -11,6 +11,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "dotenv": "^8.2.0",
+    "gh-pages": "^2.2.0",
     "jquery": "^3.4.1",
     "node-sass": "^4.13.1",
     "popper.js": "^1.16.1",
