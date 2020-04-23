@@ -43,8 +43,9 @@ export default function PicsCarousel({ memes, onSelectPic}) {
                 mouseDragEnabled
                 duration={400}
                 stagePadding={stagePadding}
-            >{
-            renderImages(carouselPics)}</AliceCarousel>
+            >
+                {renderImages(carouselPics)}
+            </AliceCarousel>
         </div>}
     </>)
 }

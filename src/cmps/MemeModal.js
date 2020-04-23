@@ -10,12 +10,14 @@ function MemeModal({newMemeUrl}) {
                 href={newMemeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                // onClick={() => window.open(newMemeUrl)}
-            >{newMemeUrl}</a>
+            >
+                {newMemeUrl}
+            </a>
             <Link
                 className="btn btn-success"
-                to="/meme"
-            >Generate Another Meme</Link>
+                to="/meme">
+                Generate Another Meme
+            </Link>
         </div>
     )
 }

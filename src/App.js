@@ -26,6 +26,7 @@ function App() {
       <div>
         <Navbar/>
         <Switch>
+          <Route exact component={Home} path="/meme-generator-react" />
           <Route exact component={Home} path="/" />
           <Route exact render={() => <MemeApp memes={memes}/>} path="/meme" />
           <Route exact render={() => <MemeDetails memes={memes} />} path="/meme/:id/edit" />

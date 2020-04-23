@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import memeService from '../../services/memeService'
 import useInput from '../../hooks/useInput';
 import useToggle from '../../hooks/useToggle';
-// import TextEdit from './TextEdit';
 import ColorPicker from './ColorPicker';
 
 function MemeForm({ handleFormData, updateTexts, currMeme }) {
@@ -27,7 +25,6 @@ function MemeForm({ handleFormData, updateTexts, currMeme }) {
         resetText1();
         resetText2();
         resetFont();
-        console.log(memeData);
         handleFormData(memeData);
     }
 
@@ -58,7 +55,7 @@ function MemeForm({ handleFormData, updateTexts, currMeme }) {
     const toggleColorPicker = (e) => {
         e.preventDefault();
         let type = e.currentTarget.attributes['input-data'].value;
-        setType(type)
+        setType(type);
         toggleVisibility();
     }
 
