@@ -1,0 +1,26 @@
+// Setup
+@import "setup/variables.scss";
+@import "setup/functions.scss";
+@import "setup/mixins.scss";
+
+// Basics
+@import "basics/helpers.scss";
+@import "basics/layout.scss";
+@import "basics/base.scss";
+@import "basics/links.scss";
+@import "basics/buttons.scss";
+@import "basics/typography.scss";
+
+// Components
+@import "components/list-cards.scss";
+@import "components/canvas.scss";
+@import "components/modal.scss";
+@import "components/edit.scss";
+@import "components/color-picker.scss";
+
+// Pages
+@import "pages/home-page";
+@import "pages/meme-details";
+
+// Libraries
+@import "react-alice-carousel/lib/scss/alice-carousel.scss";

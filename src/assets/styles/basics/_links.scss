@@ -1,0 +1,11 @@
+a {
+    color: $light-grey;
+    &.router-link-active {
+        color: $clr3;
+    }
+}
+
+.meme-link {
+    color: $clr2;
+    text-decoration: underline;
+}
